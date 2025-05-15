@@ -1,0 +1,82 @@
+/* Css/submissions.css - Styles for submissions.html main content */
+
+main {
+  max-width: 1000px;
+  margin: 2rem auto;
+  /* Remove background color from main */
+  border-radius: 1px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  color: #000000;
+}
+
+#submissions-wrapper {
+  width: 100%;
+  margin: 0;
+  background-color: white;
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+#emergency-alerts-container,
+#incident-reports-container {
+  width: 100%;
+  margin: 0 auto 1.5rem auto;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+main h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #222;
+}
+
+main section {
+  margin-bottom: 2rem;
+}
+
+main section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #a00;
+  padding-bottom: 0.3rem;
+  color: #a00;
+}
+
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+main table thead {
+  background-color: #a00;
+  color: white;
+}
+
+main table th, main table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  text-align: left;
+  vertical-align: middle;
+}
+
+main table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+main table tbody tr:hover {
+  background-color: #e6f0ff;
+}
+
+.no-records {
+  font-style: italic;
+  color: #666;
+  padding: 1rem;
+  text-align: center;
+}

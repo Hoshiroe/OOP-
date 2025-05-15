@@ -1,0 +1,54 @@
+/* Simple CSS for the <main> element of send.html */
+
+main {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+main h2 {
+  text-align: center;
+  color: #880000;
+  margin-bottom: 20px;
+}
+
+main form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+main label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+main textarea {
+  resize: vertical;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+main button {
+  background-color: #880000;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+main button:hover {
+  background-color: #a00;
+}

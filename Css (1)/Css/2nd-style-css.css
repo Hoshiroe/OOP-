@@ -1,0 +1,204 @@
+/* Logo Page Styles */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  gap: 40px;
+}
+
+.profile-dropdown li {
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #333;
+  font-size: 0.95rem;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Profile circle button style */
+.profile-circle {
+  width: 40px;
+.profile-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #a00; /* solid color background */
+  border: none;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-circle:hover {
+  background-color: #a00;
+}
+
+/* Profile image inside profile circle */
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+
+.profile-circle:hover {
+  background-color: #a00;
+}
+
+/* Profile image inside profile circle */
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+  height: 40px;
+  border-radius: 50%;
+  background-color: #a00; /* solid color background */
+  border: none;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-circle:hover {
+  background-color: #a00;
+}
+
+/* Profile image inside profile circle */
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+  height: 40px;
+  border-radius: 50%;
+  background-color: #880000;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  padding: 0;
+  overflow: hidden;
+}
+
+.profile-circle:hover {
+  background-color: #a00;
+}
+
+/* Profile image inside profile circle */
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  background-image: url(gray-profile.jpg);
+}
+
+/* Profile dropdown container */
+.profile-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  min-width: 200px;
+  z-index: 1000;
+  display: none;
+  padding: 5px 0;
+}
+
+/* Dropdown list items hover effect */
+.profile-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Additional styles for accessibility */
+.profile-dropdown li:focus {
+  outline: none;
+  background-color: #e0e0e0;
+}
+
+.image-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.image-section img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.text-section {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.text-section h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.text-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #880000;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #a00;
+}
+
+.arrow {
+  margin-left: 8px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}

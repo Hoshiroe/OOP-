@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="../Css/2nd-style-css.css" />
+  <link rel="stylesheet" href="../Css/nav-bar.css" />
+  <link rel="stylesheet" href="../Css/Logincss.css" />
+
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo"><a href="index.html"><img src="/Pictures/sssss.png" alt="RESQ Logo" style="height:26px;"></a> </div>
+    <ul class="nav-menu">
+      <li><a href="send.html">SEND EMERGENCY ALERT</a></li>
+      <li><a href="view.html">VIEW EMERGENCY CONTACTS</a></li>
+      <li><a href="report.html">REPORT AN INCIDENT</a></li>
+      <li><a href="viewf.html">VIEW FIRST AID TIPS</a></li>
+      <li><a href="register.html">REGISTER AS VOLUNTEER</a></li>
+      <li><button onclick="location.href='signin.html'">Sign In</button></li>
+      <li><button onclick="location.href='signup.html'">Sign Up</button></li>
+    </ul>
+  </nav>
+
+  <!-- Login Box -->
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-image"></div>
+      <div class="login-form">
+        <h1>LOGIN</h1>
+        <form>
+          <input type="email" id="loginEmail" placeholder="Email" required />
+          <div id="emailError" class="error-message" style="color: red; display: none;">
+            Please enter a valid email address
+          </div>
+          <div id="notRegisteredError" class="error-message" style="color: red; display: none;">
+            This email is not registered. Please sign up first.
+          </div>
+          <div id="passwordError" class="error-message" style="color: red; display: none;">
+            Incorrect password. Please try again.
+          </div>
+          <div class="password-input-group">
+            <input type="password" id="loginPassword" placeholder="Password" required />
+            <span class="password-toggle" onclick="togglePassword('loginPassword', 'toggleIcon')">
+              <i id="toggleIcon" class="eye-icon">👁️</i>
+            </span>
+          </div>
+          <button type="button" onclick="loginUser()">SIGN IN</button>
+          <script>
+            function loginUser() {
+                let email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                const emailError = document.getElementById('emailError');
+                const notRegisteredError = document.getElementById('notRegisteredError');
+                const passwordError = document.getElementById('passwordError');
+
+                // Normalize email
+                email = email.trim().toLowerCase();
+
+                // Reset error messages
+                emailError.style.display = 'none';
+                notRegisteredError.style.display = 'none';
+                passwordError.style.display = 'none';
+
+                if (!email || !password) {
+                    alert("Please enter both email and password");
+                    return;
+                }
+
+                fetch('http://localhost:8080/api/users/login', {
+
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, password: password })
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("Login successful");
+                        localStorage.setItem('email', email);
+                        localStorage.setItem('isLoggedIn', 'true');
+                        localStorage.setItem('loggedInUser', email);
+                        // After login, dynamically add profile button without reload
+                        if (window.updateProfileButton) {
+                          window.updateProfileButton();
+                        }
+                        window.location.href = "/Html/index.html";
+                    } else if (response.status === 401) {
+                        passwordError.textContent = 'Incorrect email or password. Please try again.';
+                        passwordError.style.display = 'block';
+                    } else if (response.status === 404) {
+                        notRegisteredError.textContent = 'This email is not registered. Please sign up first.';
+                        notRegisteredError.style.display = 'block';
+                    } else {
+                        alert('Login failed. Please try again later.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error connecting to backend.');
+                });
+            }
+          </script>
+          <p><a href="#">Forgot password?</a></p>
+          <p>Don't have an account? <a href="/Html/signup.html">Sign up</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="../Javascript/script.js"></script>
+  <script src="../Javascript/navbar-animation.js"></script>
+  <script src="../Javascript/user_list.js"></script>
+  <script>
+    // Clear login state on signin page load to prevent profile showing when not logged in
+    window.addEventListener('load', () => {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('loggedInUser');
+      localStorage.removeItem('email');
+    });
+  </script>
+</body>
+</html>

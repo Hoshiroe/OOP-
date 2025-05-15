@@ -1,0 +1,126 @@
+/* Login Section */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0;
+  }
+  
+  .login-box {
+    display: flex;
+    width: 850px;
+    height: 450px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  /* Left Image */
+  .login-image {
+    flex: 1;
+    background-image: url(Pictures/first-aid-block-2-Desktop.jpg);
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Right Form */
+  .login-form {
+    flex: 1;
+    background-color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .login-form h1 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #222;
+  }
+  
+  .login-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form input {
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .login-form button {
+    padding: 16px 20px;
+    font-size: 20px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .login-form p {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .login-form a {
+    color: #a00;
+    text-decoration: none;
+  }
+  
+  .login-form a:hover {
+    text-decoration: underline;
+  }
+  
+  .password-input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .password-input-group input[type="password"],
+  .password-input-group input[type="text"] {
+    flex: 1;
+    margin-bottom: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .password-toggle {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-left: none;
+    height: 42px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  
+  .password-toggle label {
+    margin-left: 5px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+  }
+  
+  .password-toggle {
+    cursor: pointer;
+    user-select: none;
+    margin-left: -30px;
+  }
+  .password-toggle:hover {
+    opacity: 0.8;
+  }
+  .eye-icon {
+    font-size: 1.2em;
+    vertical-align: middle;
+  }

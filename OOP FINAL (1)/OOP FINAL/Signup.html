@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="../Css/2nd-style-css.css" />
+  <link rel="stylesheet" href="../Css/nav-bar.css" />
+  <link rel="stylesheet" href="../Css/Logincss.css" />
+  <style>
+    /* Inline styles for layout if not defined in your CSS files */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+    }
+    .login-box {
+      display: flex;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 800px; /* Adjust as needed */
+      max-width: 100%;
+    }
+    .login-image {
+      flex: 1;
+      background: #f0f0f0; /* Fallback background; remove if image fully covers */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-image img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    .login-form {
+      flex: 1;
+      padding: 40px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="/Pictures/Ssss.png" alt="RESQ Logo" style="height:26px;">
+      </a>
+    </div>
+    <ul class="nav-menu">
+      <li><a href="send.html">SEND EMERGENCY ALERT</a></li>
+      <li><a href="view.html">VIEW EMERGENCY CONTACTS</a></li>
+      <li><a href="report.html">REPORT AN INCIDENT</a></li>
+      <li><a href="viewf.html">VIEW FIRST AID TIPS</a></li>
+      <li><a href="register.html">REGISTER AS VOLUNTEER</a></li>
+      <li><button onclick="location.href='signin.html'">Sign In</button></li>
+      <li><button onclick="location.href='signup.html'">Sign Up</button></li>
+    </ul>
+  </nav>
+  <div class="login-container">
+    <div class="login-box">
+      <!-- Left box containing the picture -->
+      <div class="login-image">
+        <img src="../Pictures/signup2.png" alt="Side Picture">
+      </div>
+      <!-- Right box containing the sign up form -->
+      <div class="login-form">
+        <h1>SIGN UP</h1>
+        <form>
+            <input type="email" id="email" placeholder="Email" required />
+            <div id="emailError" class="error-message" style="color: red; display: none;">
+              Please enter a valid email address
+            </div>
+            <div class="password-input-group">
+              <input type="password" id="password" placeholder="Password" required />
+              <span class="password-toggle" onclick="togglePassword('password', 'toggleIcon')">
+                <i id="toggleIcon" class="eye-icon">👁️</i>
+              </span>
+            </div>
+            <div class="password-input-group">
+              <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+              <span class="password-toggle" onclick="togglePassword('confirmPassword', 'toggleIconConfirm')">
+                <i id="toggleIconConfirm" class="eye-icon">👁️</i>
+              </span>
+            </div>
+            <div id="passwordError" class="error-message" style="color: red; display: none;">
+              Passwords do not match!
+            </div>
+          <button type="button" onclick="registerUser()">SIGN UP</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    const originalRegisterUser = registerUser;
+    registerUser = function() {
+      originalRegisterUser();
+      if (window.updateProfileButton) {
+        window.updateProfileButton();
+      }
+    };
+  </script>
+  <script src="../Javascript/script.js"></script>
+  <script src="../Javascript/navbar-animation.js"></script>
+  <script src="../Javascript/user_list.js"></script>                                          
+  <script>
+    window.addEventListener('load', () => {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('loggedInUser');
+      localStorage.removeItem('email');
+    });
+  </script>
+</body>
+</html>

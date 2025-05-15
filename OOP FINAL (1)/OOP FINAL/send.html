@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Send Emergency Alert</title>
+  <link rel="stylesheet" href="../Css/2nd-style-css.css" />
+  <link rel="stylesheet" href="../Css/nav-bar.css" />
+  <link rel="stylesheet" href="../Css/send.css" />
+
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo"><a href="index.html"><img src="/Pictures/sssss.png" alt="RESQ Logo" style="height:26px;"></a> </div>
+    <ul class="nav-menu">
+      <li><a href="send.html">SEND EMERGENCY ALERT</a></li>
+      <li><a href="view.html">VIEW EMERGENCY CONTACTS</a></li>
+      <li><a href="report.html">REPORT AN INCIDENT</a></li>
+      <li><a href="viewf.html">VIEW FIRST AID TIPS</a></li>
+      <li><a href="register.html">REGISTER AS VOLUNTEER</a></li>
+      <li><button onclick="location.href='signin.html'">Sign In</button></li>
+      <li><button onclick="location.href='signup.html'">Sign Up</button></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Send Emergency Alert</h2>
+    <form id="alertForm">
+      <label for="alertMessage">Alert Message:</label><br />
+      <textarea id="alertMessage" name="alertMessage" rows="4" cols="50" required></textarea><br />
+      <button type="submit">Send Alert</button>
+    </form>
+  </main>
+
+  <script src="/Javascript/emergency_api.js"></script>
+  <script src="/Javascript/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('alertForm');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (!isLoggedIn) {
+          alert('You must be signed in or sign up first to submit an emergency alert.');
+          window.location.href = '/Html/signin.html';
+          return;
+        }
+        const email = localStorage.getItem('email');
+        if (!email) {
+          alert('User email not found. Please sign in again.');
+          window.location.href = '/Html/signin.html';
+          return;
+        }
+        const alertMessage = document.getElementById('alertMessage').value.trim();
+        if (!alertMessage) {
+          alert('Alert message cannot be empty.');
+          return;
+        }
+        try {
+          const response = await fetch('http://localhost:8080/api/emergency-alerts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, alertMessage: alertMessage })
+          });
+          if (response.ok) {
+            alert('Emergency alert submitted successfully.');
+            form.reset();
+          } else {
+            const errorData = await response.json();
+            alert('Failed to submit alert: ' + (errorData.message || 'Unknown error'));
+          }
+        } catch (error) {
+          alert('Error submitting alert: ' + error.message);
+        }
+      });
+    });
+  </script>
+  <script src="../Javascript/navbar-animation.js"></script>
+</body>
+</html>

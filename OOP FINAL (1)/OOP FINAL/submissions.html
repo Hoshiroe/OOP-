@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submissions</title>
+  <link rel="stylesheet" href="../Css/2nd-style-css.css" />
+  <link rel="stylesheet" href="../Css/nav-bar.css" />
+  <link rel="stylesheet" href="../Css/Submissions.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo"><a href="index.html"><img src="/Pictures/sssss.png" alt="RESQ Logo" style="height:26px;"></a> </div>
+    <ul class="nav-menu">
+      <li><a href="send.html">SEND EMERGENCY ALERT</a></li>
+      <li><a href="view.html">VIEW EMERGENCY CONTACTS</a></li>
+      <li><a href="report.html">REPORT AN INCIDENT</a></li>
+      <li><a href="viewf.html">VIEW FIRST AID TIPS</a></li>
+      <li><a href="register.html">REGISTER AS VOLUNTEER</a></li>
+      <li><button onclick="location.href='signin.html'">Sign In</button></li>
+      <li><button onclick="location.href='signup.html'">Sign Up</button></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div id="submissions-wrapper">
+      <h1>Submissions Records</h1>
+
+      <section id="emergency-alerts-section">
+        <h2>Emergency Alerts</h2>
+        <div id="emergency-alerts-container">
+          <p class="no-records">Loading emergency alerts...</p>
+        </div>
+      </section>
+
+      <section id="incident-reports-section">
+        <h2>Incident Reports</h2>
+        <div id="incident-reports-container">
+          <p class="no-records">Loading incident reports...</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    async function fetchSubmissions() {
+      try {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const url = loggedInUser
+          ? `http://localhost:8080/api/submissions?email=${encodeURIComponent(loggedInUser)}`
+          : 'http://localhost:8080/api/submissions';
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        displayEmergencyAlerts(data.emergency_alerts);
+        displayIncidentReports(data.incident_reports);
+      } catch (error) {
+        document.getElementById('emergency-alerts-container').innerHTML = '<p class="no-records">Failed to load emergency alerts.</p>';
+        document.getElementById('incident-reports-container').innerHTML = '<p class="no-records">Failed to load incident reports.</p>';
+        console.error('Fetch error:', error);
+      }
+    }
+
+    function displayEmergencyAlerts(alerts) {
+      const container = document.getElementById('emergency-alerts-container');
+      if (!alerts || alerts.length === 0) {
+        container.innerHTML = '<p class="no-records">No emergency alerts found.</p>';
+        return;
+      }
+      let html = '<table><thead><tr><th>Email</th><th>Alert Message</th><th>Timestamp</th></tr></thead><tbody>';
+      alerts.forEach(alert => {
+        html += `<tr>
+          <td>${escapeHtml(alert.email)}</td>
+          <td>${escapeHtml(alert.alertMessage) || 'No alert message provided'}</td>
+          <td>${new Date(alert.timestamp).toLocaleString()}</td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    function displayIncidentReports(reports) {
+      const container = document.getElementById('incident-reports-container');
+      if (!reports || reports.length === 0) {
+        container.innerHTML = '<p class="no-records">No incident reports found.</p>';
+        return;
+      }
+      let html = '<table><thead><tr><th>Email</th><th>First Name</th><th>Last Name</th><th>Location</th><th>Description</th><th>Message</th><th>Timestamp</th></tr></thead><tbody>';
+      reports.forEach(report => {
+        html += `<tr>
+          <td>${escapeHtml(report.email)}</td>
+          <td>${escapeHtml(report.fname)}</td>
+          <td>${escapeHtml(report.lname)}</td>
+          <td>${escapeHtml(report.location)}</td>
+          <td>${escapeHtml(report.description)}</td>
+          <td>${escapeHtml(report.message || '')}</td>
+          <td>${new Date(report.timestamp).toLocaleString()}</td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    // Simple HTML escaping to prevent XSS
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text.replace(/[&<>"']/g, function(m) {
+        switch (m) {
+          case '&': return '&amp;';
+          case '<': return '<';
+          case '>': return '>';
+          case '"': return '"';
+          case "'": return '&#39;';
+          default: return m;
+        }
+      });
+    }
+
+    // Fetch and display submissions on page load and every 5 seconds
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchSubmissions();
+      setInterval(fetchSubmissions, 5000);
+    });
+  </script>
+
+  <script src="../Javascript/script.js"></script>
+  <script src="../Javascript/navbar-animation.js"></script>
+
+</body>
+</html>
